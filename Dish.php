@@ -15,18 +15,18 @@ class Dish
     */
 	protected $table; 
 
-	/**
+    /**
     *
     * @var id 
     */
 	protected $id;
 
-	/**
+    /**
     *
     * @var string 
     */
 	protected $name;
-	
+
     /**
      * Create a new connection.
      *
@@ -38,7 +38,7 @@ class Dish
 		$this->pdo = $connection->GetPdo();
 	}
 
-	/**
+    /**
 	* Create a new Dish
 	* 
 	* @param string $name
@@ -55,7 +55,7 @@ class Dish
         $this->name = $name;
 	}
 
-	/**
+    /**
 	* Get random Dish by type
 	*
 	* @param string $type
@@ -68,7 +68,7 @@ class Dish
 	    return $row;  
 	}
 
-	/**
+    /**
 	* Get id Dish
 	*
 	* @return int

@@ -5,15 +5,15 @@ class Ingredient
     *
     * @var int 
     */
-	protected $id;
+    protected $id;
 
-	/**
+    /**
     *
     * @var string 
     */
-	protected $name;
+    protected $name;
 
-	/**
+    /**
     *
     * @var int 
     */
@@ -30,49 +30,50 @@ class Ingredient
     *
     * @param object $connection 
     */
-	function __construct( MySqlConnection $connection)
-	{
-		$this->table = $connection->getTableName();
-		$this->pdo = $connection->GetPdo();
-	}
+    function __construct( MySqlConnection $connection)
+    {
+        $this->table = $connection->getTableName();
+        $this->pdo = $connection->GetPdo();
+    }
 
     /**
-	* Create a new Ingredient
-	* 
-	* @param string $name
+    * Create a new Ingredient
+    * 
+    * @param string $name
     * @param int $quantity
     * @param int $fats
     * @param int $price
     */
-	public function createIngredient($name, $fats, $price, $quantity)
-	{
-	    $stmt = $this->pdo->prepare("INSERT into ".$this->table." (name, fats, price) values (:name, :fats, :price)");
+    public function createIngredient($name, $fats, $price, $quantity)
+    {
+        $stmt = $this->pdo->prepare("INSERT into ".$this->table." (name, fats, price) values (:name, :fats, :price)");
         $this->name = $stmt->bindParam(':name', $name);
         $stmt->bindParam(':fats', $fats);
         $stmt->bindParam(':price', $price);
         $stmt->execute();
         $this->quantity = $quantity;
         $this->name = $name;
-	}
-	/**
-	* Get id  Ingredient
-	*
-	* @return int
+    }
+
+    /**
+    * Get id  Ingredient
+    *
+    * @return int
     */
-	public function getIdIngredient()
-	{ 
+    public function getIdIngredient()
+    { 
         $stdt = $this->pdo->query("SELECT id from ".$this->table." where name='".$this->name."' limit 1");
         $this->id = $stdt->fetch();
         return $this->id['id'];
-	}
+    }
 
-	/**
-	* Get quantity of Ingredient
-	*
-	* @return int
+    /**
+    * Get quantity of Ingredient
+    *
+    * @return int
     */
-	public function getQuantityIngredient()
-	{ 
+    public function getQuantityIngredient()
+    { 
         return $this->quantity;
-	}
+    }
 }
