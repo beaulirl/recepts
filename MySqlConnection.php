@@ -29,6 +29,12 @@ class MySqlConnection
 		$this->charset = "utf8";
 	}
 
+    /**
+    * Set name of table.
+    *
+    * @param  string $table_name
+    *
+    */
 	public function SetTableName($table_name)
 	{
 		$this->dbt_name = $table_name;
@@ -49,6 +55,7 @@ class MySqlConnection
 	}
 
 	/**
+	*
     * @return object
     */
 	public function GetPdo()

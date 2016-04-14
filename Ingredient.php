@@ -1,10 +1,30 @@
 <?php
 class Ingredient 
-{
+{	
+    /**
+    *
+    * @var int 
+    */
 	protected $id;
+
+	/**
+    *
+    * @var string 
+    */
 	protected $name;
+
+	/**
+    *
+    * @var int 
+    */
     protected $quantity;
-    protected $table; 
+
+    /**
+    *
+    * @var string 
+    */
+    protected $string; 
+
     /**
     * Create a new connection.
     *
@@ -35,7 +55,7 @@ class Ingredient
         $this->name = $name;
 	}
 	/**
-	* Get id Ingredient
+	* Get id  Ingredient
 	*
 	* @return int
     */
@@ -56,4 +76,3 @@ class Ingredient
         return $this->quantity;
 	}
 }
-?>

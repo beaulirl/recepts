@@ -14,8 +14,19 @@ class Dish
     * @var string 
     */
 	protected $table; 
+
+	/**
+    *
+    * @var id 
+    */
 	protected $id;
+
+	/**
+    *
+    * @var string 
+    */
 	protected $name;
+	
     /**
      * Create a new connection.
      *
