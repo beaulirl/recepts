@@ -7,13 +7,13 @@ class Ingredient
     */
 	protected $id;
 
-	/**
+    /**
     *
     * @var string 
     */
 	protected $name;
 
-	/**
+    /**
     *
     * @var int 
     */
@@ -54,10 +54,11 @@ class Ingredient
         $this->quantity = $quantity;
         $this->name = $name;
 	}
-	/**
-	* Get id  Ingredient
-	*
-	* @return int
+
+    /**
+    * Get id  Ingredient
+    *
+    * @return int
     */
 	public function getIdIngredient()
 	{ 
@@ -66,10 +67,10 @@ class Ingredient
         return $this->id['id'];
 	}
 
-	/**
-	* Get quantity of Ingredient
-	*
-	* @return int
+    /**
+    * Get quantity of Ingredient
+    *
+    * @return int
     */
 	public function getQuantityIngredient()
 	{ 

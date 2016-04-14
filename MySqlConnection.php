@@ -39,28 +39,29 @@ class MySqlConnection
 	{
 		$this->dbt_name = $table_name;
 	}
-	/**
+
+    /**
     * Set a new connection.
     *
     */
-	public function SetConnection()
-	{
-	 	$dsn = "mysql:host=$this->host;dbname=$this->db_name;charset=$this->charset";
-		$opt = array(
+    public function SetConnection()
+    {
+	    $dsn = "mysql:host=$this->host;dbname=$this->db_name;charset=$this->charset";
+	    $opt = array(
     			PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 		);
-		$this->pdo = new PDO($dsn, $this->user, $this->password, $opt);
+	    $this->pdo = new PDO($dsn, $this->user, $this->password, $opt);
 
 	}
 
-	/**
-	*
+    /**
+    *
     * @return object
     */
-	public function GetPdo()
-	{
-		return $this->pdo;
+    public function GetPdo()
+    {
+        return $this->pdo;
 	}
 
     /**
