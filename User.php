@@ -40,9 +40,7 @@ class User
     /**
     * Create a new User.
     *
-    * @param string $name
-    * @param string $password
-    * @param string $email 
+    * @param string $clear_password 
     */
     public function createUser($name, $password, $email)
     {
@@ -51,6 +49,16 @@ class User
         $stmt->bindParam(':password', $this->setPassword($password));
         $stmt->bindParam(':email', $email);
         $stmt->execute();
+    }
+
+    /**
+    * Delete User.
+    *
+    * @param string $clear_password 
+    */
+    public function deleteUser($id)
+    {
+        $stmt = $this->pdo->query("DELETE from ".$this->table." where id='".$id."' limit 1");   
     }
 
     /**
@@ -71,29 +79,5 @@ class User
             return 1;
         }
         return false;
-    }
-
-    /**
-    * Delete User.
-    *
-    * @param string $clear_password 
-    */
-    public function deleteUser($id)
-    {
-        $stmt = $this->pdo->query("DELETE from ".$this->table." where id='".$id."' limit 1");   
-    }
-
-    /**
-    * Find userId by email
-    *
-    * @param string $email 
-    */
-    public function getUserId($email)
-    {
-        $stdt = $this->pdo->prepare("SELECT id from ".$this->table." where email=:email limit 1");
-        $stdt->bindParam(':email', $email);
-        $stdt->execute();
-        $user = $stdt->fetch();
-        return $user['id'];
     }
 }

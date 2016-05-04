@@ -1,10 +1,5 @@
-<?php session_start();
-require_once("ConfigurationManager.php");
-require_once("MySqlConnection.php");
-require_once("Dish.php");
-require_once("Ingredient.php");
-require_once("Pivot.php");
-require_once("User.php");
+<?php
+require_once __DIR__ .'/vendor/autoload.php';
 $b = new MySqlConnection(ConfigurationManager::get('db_host'),ConfigurationManager::get('db_user'),
 ConfigurationManager::get('db_passw'), ConfigurationManager::get('db_name'));
 $b->SetConnection();
@@ -12,7 +7,7 @@ $b->SetConnection();
 if(isset($_POST['send'])){
 $b->SetTableName(ConfigurationManager::get('db_tbname'));	
 $a = new Dish($b);
-$a->createDish($_POST["name"], $_POST["type"], $_POST["recept"], $_SESSION["mail"]);
+$a->createDish($_POST["name"], $_POST["type"], $_POST["recept"]);
 $b->SetTableName(ConfigurationManager::get('db_tbname2'));
 $f = new Ingredient($b);
 $f->createIngredient($_POST["ingredient"], $_POST["fats"], $_POST["price"], $_POST["quantity"]);
@@ -21,6 +16,7 @@ $g = new Pivot($a, $f, $b);
 $g->createPivotData();
 }
 if(isset($_POST['msg'])){
+$b->SetTableName(ConfigurationManager::get('db_tbname'));		
 $a = new Dish($b);	
 function FormString($dish)
 {
@@ -37,6 +33,7 @@ $desert = $a->getRandDish(Dish::DESERT);
 $sum = $first['price'] + $second['price'] + $salad['price'] + $desert['price'];
 echo FormString($first). "</br>" .FormString($second). "</br>" .FormString($salad). "</br>" .FormString($desert). "</br>". $sum;
 }
+
 $b->SetTableName(ConfigurationManager::get('user'));
 $user = new User($b);
 if(isset($_POST["submit"]))

@@ -7,4 +7,4 @@
 <input type="hidden" name="sbmt" />
 <button type="submit" class="btn" name="submit" >Signup</button>                        
 </form>
-<?php require_once("main.php"); ?>
+<?php require_once __DIR__ .'/vendor/autoload.php'; ?>

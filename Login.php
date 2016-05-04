@@ -4,4 +4,4 @@
 <input type="password" id="passw" class="form" placeholder="Password" name="pasw"> 
 <button type="submit" class="btn" name="login" >Login</button>                        
 </form>
-<?php require_once("main.php"); ?>
+<?php require_once __DIR__ .'/vendor/autoload.php'; ?>
