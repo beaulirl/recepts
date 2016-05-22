@@ -45,9 +45,9 @@ class Dish
     * @param string $type
     * @param string $recept
     */
-    public function createDish($name, $type, $recept)
+    public function createDish($name, $type, $recept, $mail)
     {
-        $stmt = $this->pdo->prepare("INSERT into ".$this->table." (name, type, recept) values (:name, :type, :recept)");
+        $stmt = $this->pdo->prepare("INSERT into ".$this->table." (name, type, recept, user) values (:name, :type, :recept, '".$mail."')");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':type', $type);
         $stmt->bindParam(':recept', $recept);
