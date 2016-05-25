@@ -1,0 +1,16 @@
+{
+	"autoload": {
+	    "classmap": [
+            "Dish.php",
+            "Ingredient.php",
+            "MySqlConnection.php",
+            "ConfigurationManager.php",
+            "Pivot.php",
+            "User.php",
+            "PivotUser.php"
+            ],
+          "files" : [
+            "main.php"
+            ]
+	}
+}
