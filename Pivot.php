@@ -47,4 +47,5 @@ class Pivot
         $stmt->bindParam(':quantity', $this->quantity);
         $stmt->execute();
   }
+
 }
