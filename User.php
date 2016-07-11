@@ -80,4 +80,15 @@ class User
         }
         return false;
     }
+
+    /**
+    * Get UserId
+    */
+    public function getId($mail)
+    {
+        $stdt = $this->pdo->query("SELECT id from ".$this->table." where email='".$mail."' limit 1");
+        $this->id = $stdt->fetch();
+        return $this->id['id'];
+    }
+
 }

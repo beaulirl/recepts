@@ -1,10 +1,22 @@
-<form action="Registration.php" method="post">           
-<h2>Signup</h2>
-<input type="text" id="uname" class="form" placeholder="Username" name="username">
-<input type="text" id="email" class="form" placeholder="E-mail" name="email">  
-<input type="password" id="passw" class="form" placeholder="Password" name="passw">
-<input type="password" id="cpassw" class="form" placeholder="Confirm password" name="cpassw">
-<input type="hidden" name="sbmt" />
-<button type="submit" class="btn" name="submit" >Signup</button>                        
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<form role="form" class="form-horizontal" action="Registration.php" method="post">    
+<div class="container">        
+<h2>Регистрация</h2>
+<div class="form-group">	
+  <input type="text" id="uname" class="form-control" placeholder="Username" name="username">
+</div>  
+<div class="form-group">	
+  <input type="text" id="email" class="form-control" placeholder="E-mail" name="email">  
+</div>  
+<div class="form-group">	
+  <input type="password" id="passw" class="form-control" placeholder="Password" name="passw">
+</div>  
+<div class="form-group">	
+  <input type="password" id="cpassw" class="form-control" placeholder="Confirm password" name="cpassw">
+</div>
+<div class="form-group">	
+  <button type="submit" class="btn btn-info" name="submit" >Signup</button> 
+</div>                         
 </form>
+</div>  
 <?php require_once __DIR__ .'/vendor/autoload.php'; ?>

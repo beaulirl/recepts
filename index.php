@@ -1,33 +1,126 @@
-<?php require_once __DIR__ .'/vendor/autoload.php';?>
-<link href="style.css" rel="stylesheet">
- <script src="app.js"></script>
-<form action="index.php" method="post" >           
-<h2>Какие блюда вы готовите?</h2>
-<input id="name" type="text" placeholder="Название" name="name">
- <p><select  multiple name="type">
-    <option disabled>Выберите тип</option>
-    <?php $types = require('dish_type_dict.php');
-    foreach($types as $type => $v): ?>
-    <option value="<?php echo $type; ?>"><?= $v ?></option>
-    <?php endforeach; ?>
-   </select></p>
-<input id="recept" type="text" placeholder="Ссылка на рецепт" name="recept">
-<ul class="posts">
-<li><input id="ingredient" type="text" placeholder="Ингредиент" name="ingredient"></li>
-<li><input id="fats" type="text" placeholder="Жирность" name="fats"></li>
-<li><input id="quantity" type="text" placeholder="Количество" name="quantity"></li>
-<li><input id="price" type="text" placeholder="Цена" name="price"></li>
 
-</ul>
+<!DOCTYPE html>
+<html lang="en">
 
-<button type="submit" name="send">Отправить</button>                        
-<button type="submit" name="msg">На этой неделе</button>
-</form>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recepts</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
 
-<form action="Registration.php">
-    <input type="submit" name="reg" value="Регистрация">
-</form>
-<form action="Login.php" method="post">
-    <input type="submit" name="log" value="Авторизация">
-</form>
+<body>
+    <?php require_once __DIR__ .'/vendor/autoload.php';
+    if (isset($_GET['out']) && $_GET['out'] == 1) {
+        session_unset();
+        header('Location: index.php');
+    }   
+    
+    if (isset($_SESSION["mail"])) { ?>
+
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">   
+                <a href="/?out=1" class="btn btn-default navbar-btn navbar-right">Выход</a>
+                <p class="navbar-text">Вы зашли как <?php echo $_SESSION["mail"]; ?></p>
+            </div> 
+        </div>
+    </nav>    
+    <?php }  
+    else { ?>
+    <nav class="navbar navbar-default" role="navigation">
+        <div id="navbar" class="navbar-collapse collapse">        
+            <ul class="nav navbar-nav navbar-right">
+                <li><a type="button" data-toggle="modal" data-target="#loginModal">
+                    <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<?php } ?> 
+    <div id="loginModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Login </h4>
+            </div>
+            <div class="modal-body">
+            <form class="form-inline" action="index.php" method="post">
+                <div class="form-group">
+                    <label class="sr-only" for="email">Email adress</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email" name="e_mail">
+                </div> 
+                <div class="form-group">
+                    <label class="sr-only" for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="password" name="pasw"> 
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm" name="login">Sign in</button>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Какие блюда вы готовите?</h2>
+                <form action="index.php" method="post" >           
+                    <div class="input-group input-group-lg">
+                        <input type="text" class="form-control" placeholder="Название" name="name">
+                    </div>
+                    <hr>
+                    <div class="form-group">    
+                        <select class="form-control" multiple name="type">
+                            <option disabled>Выберите тип</option>
+                            <?php $types = require('dish_type_dict.php');
+                            foreach($types as $type => $v): ?>
+                            <option value="<?php echo $type; ?>"><?= $v ?></option>
+                            <?php endforeach; ?>
+                       </select>
+                    </div>
+                    <hr>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="recept" placeholder="Ссылка на рецепт" name="recept">
+                    </div>
+                    <hr>
+                    <div class="input-group col-md-4">
+                        <input class="form-control" id="ingredient" type="text" placeholder="Ингредиент" name="ingredient"></li>
+                        <input class="form-control" id="fats" type="text" placeholder="Жирность" name="fats"></li>
+                        <input class="form-control" id="quantity" type="text" placeholder="Количество" name="quantity"></li>
+                        <input class="form-control" id="price" type="text" placeholder="Цена" name="price"></li>
+                    </div>
+                    <button class="btn btn-default" type="submit" name="add">Добавить</button>
+                    <hr>
+                    <button class="btn btn-default" type="submit" name="send">Отправить</button>           
+            </div>
+
+            <div class="col-md-4">
+                <h2>Что приготовить?</h2>
+                <button type="submit" id="week" class="btn btn-success btn-lg" name="msg" >На этой неделе</button>
+                <hr>
+                <div class="row">
+                    <p><?php if (isset($form_string)) echo $form_string; ?></p>
+                </div>
+            </div>
+                </form> 
+
+            <div class="col-md-4">
+                <h2>Все мои рецепты:</h2>
+                <?php if (isset($recepts_array)) { $recepts = $recepts_array;
+                foreach($recepts as $type): ?>
+                <p><?php echo $type; ?></p>
+                <?php endforeach; } ?>
+            </div>
+    </div>
+            
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
 

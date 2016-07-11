@@ -45,12 +45,13 @@ class Dish
     * @param string $type
     * @param string $recept
     */
-    public function createDish($name, $type, $recept, $mail)
+    public function createDish($name, $type, $recept, $user)
     {
-        $stmt = $this->pdo->prepare("INSERT into ".$this->table." (name, type, recept, user) values (:name, :type, :recept, '".$mail."')");
+        $stmt = $this->pdo->prepare("INSERT into ".$this->table." (name, type, recept, user) values (:name, :type, :recept, :user)");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':type', $type);
         $stmt->bindParam(':recept', $recept);
+        $stmt->bindParam(':user', $user);
         $stmt->execute();
         $this->name = $name;
     }
@@ -78,5 +79,18 @@ class Dish
         $stdt = $this->pdo->query("SELECT id from ".$this->table." where name='".$this->name."' limit 1");
         $this->id = $stdt->fetch();
         return $this->id['id'];
+    }
+
+    /**
+    * Get all user recepts
+    *
+    * @param string $email
+    * @return array
+    */
+    public function getUserRecepts($email)
+    {
+        $stdt = $this->pdo->query("SELECT name from ".$this->table." where user='".$email."' ");
+        $users_recepts = $stdt->fetchAll(PDO::FETCH_COLUMN);
+        return $users_recepts;
     }
 }
