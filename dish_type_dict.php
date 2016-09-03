@@ -1,7 +1,7 @@
 <?php
 return [
-    Dish::FIRST_DISH => 'Первое',
-    Dish::SECOND_DISH => 'Второе',
-    Dish::SALAD => 'Салат',
-    Dish::DESERT => 'Десерт'
+    Dish::FIRST_DISH => 'First course',
+    Dish::SECOND_DISH => 'Main course',
+    Dish::SALAD => 'Salad',
+    Dish::DESERT => 'Dessert'
 ];

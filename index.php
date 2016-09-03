@@ -23,8 +23,8 @@
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">   
-                <a href="/?out=1" class="btn btn-default navbar-btn navbar-right">Выход</a>
-                <p class="navbar-text">Вы зашли как <?php echo $_SESSION["mail"]; ?></p>
+                <a href="/?out=1" class="btn btn-default navbar-btn navbar-right">Exit</a>
+                <p class="navbar-text">You login as <?php echo $_SESSION["mail"]; ?></p>
             </div> 
         </div>
     </nav>    
@@ -67,15 +67,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <h2>Какие блюда вы готовите?</h2>
+                <h2>What are you cooking?</h2>
                 <form action="index.php" method="post" >           
                     <div class="input-group input-group-lg">
-                        <input type="text" class="form-control" placeholder="Название" name="name">
+                        <input type="text" class="form-control" placeholder="Name" name="name">
                     </div>
                     <hr>
                     <div class="form-group">    
                         <select class="form-control" multiple name="type">
-                            <option disabled>Выберите тип</option>
+                            <option disabled>Choose a tipe</option>
                             <?php $types = require('dish_type_dict.php');
                             foreach($types as $type => $v): ?>
                             <option value="<?php echo $type; ?>"><?= $v ?></option>
@@ -84,23 +84,23 @@
                     </div>
                     <hr>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="recept" placeholder="Ссылка на рецепт" name="recept">
+                        <input type="text" class="form-control" id="recept" placeholder="Link" name="recept">
                     </div>
                     <hr>
                     <div class="input-group col-md-4">
-                        <input class="form-control" id="ingredient" type="text" placeholder="Ингредиент" name="ingredient"></li>
-                        <input class="form-control" id="fats" type="text" placeholder="Жирность" name="fats"></li>
-                        <input class="form-control" id="quantity" type="text" placeholder="Количество" name="quantity"></li>
-                        <input class="form-control" id="price" type="text" placeholder="Цена" name="price"></li>
+                        <input class="form-control" id="ingredient" type="text" placeholder="Ingredient" name="ingredient"></li>
+                        <input class="form-control" id="fats" type="text" placeholder="Fat" name="fats"></li>
+                        <input class="form-control" id="quantity" type="text" placeholder="Quantity" name="quantity"></li>
+                        <input class="form-control" id="price" type="text" placeholder="Price" name="price"></li>
                     </div>
-                    <button class="btn btn-default" type="submit" name="add">Добавить</button>
+                    <button class="btn btn-default" type="submit" name="add">Add</button>
                     <hr>
-                    <button class="btn btn-default" type="submit" name="send">Отправить</button>           
+                    <button class="btn btn-default" type="submit" name="send">Send</button>           
             </div>
 
             <div class="col-md-4">
-                <h2>Что приготовить?</h2>
-                <button type="submit" id="week" class="btn btn-success btn-lg" name="msg" >На этой неделе</button>
+                <h2>What can I cook?</h2>
+                <button type="submit" id="week" class="btn btn-success btn-lg" name="msg" >This week</button>
                 <hr>
                 <div class="row">
                     <p><?php if (isset($form_string)) echo $form_string; ?></p>
@@ -109,7 +109,7 @@
                 </form> 
 
             <div class="col-md-4">
-                <h2>Все мои рецепты:</h2>
+                <h2>All my recepies:</h2>
                 <?php if (isset($recepts_array)) { $recepts = $recepts_array;
                 foreach($recepts as $type): ?>
                 <p><?php echo $type; ?></p>
